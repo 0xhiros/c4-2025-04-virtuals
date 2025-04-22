@@ -20,7 +20,6 @@ describe("POC-veVIRTUAL token approval is still possible", function () {
   async function deployBaseFixture() {
     const { deployer } = await getAccounts();
 
-    // Deploy mock tokens
     const veVirtualToken = await ethers.getContractFactory("veVirtualToken");
     const veToken = await veVirtualToken.deploy(deployer.address);
 
