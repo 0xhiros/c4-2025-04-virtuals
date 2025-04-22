@@ -11,7 +11,7 @@ function getDescHash(str) {
   return ethers.keccak256(ethers.toUtf8Bytes(str));
 }
 
-describe("POC-Wrong implementation to load contribution nft data at ServiceNft.mint", function () {
+describe("POC-ServiceNft could be minted before Contribution Nft", function () {
   const genesisInput = {
     name: "Jessica",
     symbol: "JSC",
@@ -59,8 +59,6 @@ describe("POC-Wrong implementation to load contribution nft data at ServiceNft.m
       {
         initializer: "initialize",
         unsafeAllow: ["constructor", "delegatecall"],
-        // kind: "transparent",
-        // initialOwner: owner.address,
       }
     );
 
@@ -97,7 +95,7 @@ describe("POC-Wrong implementation to load contribution nft data at ServiceNft.m
     };
   }
 
-  it("POC: Wrong implementation to load contribution nft data at ServiceNft.mint", async function () {
+  it("POC: ServiceNft could be minted before Contribution Nft", async function () {
     const { minter, founder, tba } = await getAccounts();
     const { agentNft, agentDAO, serviceNft } = await deployBaseContracts();
 
@@ -147,7 +145,8 @@ describe("POC-Wrong implementation to load contribution nft data at ServiceNft.m
 
     expect(await serviceNft.ownerOf(proposalId)).to.equal(tba.address);
 
-    console.log("---The core is always zero, and cannot be set forever---");
-    expect(await serviceNft.connect(tba).getCore(proposalId)).to.be.eq(0);
+    console.log(
+      "---The ServiceNft has been minted without contribution nft, and same values are incorrect---"
+    );
   });
 });
