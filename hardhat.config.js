@@ -57,6 +57,9 @@ module.exports = {
     ],
   },
   networks: {
+    hardhat: {
+      allowUnlimitedContractSize: true,
+    },
     base: {
       url: "https://mainnet.base.org",
       accounts: [process.env.PRIVATE_KEY],
